@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/src/">
+    <Project Path="src/LibraryManager.Application/LibraryManager.Application.csproj" Id="b2967651-1eb4-4407-8130-be4ba70f5f57" />
     <Project Path="src/LibraryManager.Domain/LibraryManager.Domain.csproj" />
     <Project Path="src/LibraryManager.Infrastructure/LibraryManager.Infrastructure.csproj" />
     <Project Path="src/LibraryManager.WebApi/LibraryManager.WebApi.csproj" />

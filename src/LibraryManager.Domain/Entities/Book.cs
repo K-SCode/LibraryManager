@@ -14,11 +14,9 @@ namespace LibraryManager.Domain.Entities
         public required string Isbn { get; set; }
         public required string Description { get; set; }
         public required BookStatus Status { get; set; }
-        public Guid? CurrentBorrowerId { get; set; }
-        public DateTime? ReturnDate { get; set; }
         public required DateTime PublishDate { get; set; }
         public required Guid CategoryId { get; set; }
         public Category? Category { get; set; }
+        public ICollection<Rental> Rentals { get; set; } = [];
     }
-      
 }
