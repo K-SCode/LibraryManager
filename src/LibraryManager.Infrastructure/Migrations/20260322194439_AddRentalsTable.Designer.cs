@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryManager.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260321193637_Initial")]
-    partial class Initial
+    [Migration("20260322194439_AddRentalsTable")]
+    partial class AddRentalsTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace LibraryManager.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("LibraryManager.Domain.Entities.Model.Author", b =>
+            modelBuilder.Entity("LibraryManager.Domain.Entities.Author", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -53,7 +53,7 @@ namespace LibraryManager.Infrastructure.Migrations
                     b.ToTable("Authors");
                 });
 
-            modelBuilder.Entity("LibraryManager.Domain.Entities.Model.Book", b =>
+            modelBuilder.Entity("LibraryManager.Domain.Entities.Book", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -70,9 +70,6 @@ namespace LibraryManager.Infrastructure.Migrations
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("GETUTCDATE()");
 
-                    b.Property<Guid?>("CurrentBorrowerId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(500)
@@ -85,9 +82,6 @@ namespace LibraryManager.Infrastructure.Migrations
                         .IsFixedLength();
 
                     b.Property<DateTime>("PublishDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("ReturnDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Status")
@@ -115,7 +109,7 @@ namespace LibraryManager.Infrastructure.Migrations
                     b.ToTable("Books");
                 });
 
-            modelBuilder.Entity("LibraryManager.Domain.Entities.Model.Category", b =>
+            modelBuilder.Entity("LibraryManager.Domain.Entities.Category", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -136,15 +130,50 @@ namespace LibraryManager.Infrastructure.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("LibraryManager.Domain.Entities.Model.Book", b =>
+            modelBuilder.Entity("LibraryManager.Domain.Entities.Rental", b =>
                 {
-                    b.HasOne("LibraryManager.Domain.Entities.Model.Author", "Author")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ActualReturnDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("BookId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETUTCDATE()");
+
+                    b.Property<DateTime>("DueDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsOverdue")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<DateTime>("RentalDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BookId");
+
+                    b.ToTable("Rentals");
+                });
+
+            modelBuilder.Entity("LibraryManager.Domain.Entities.Book", b =>
+                {
+                    b.HasOne("LibraryManager.Domain.Entities.Author", "Author")
                         .WithMany("Books")
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("LibraryManager.Domain.Entities.Model.Category", "Category")
+                    b.HasOne("LibraryManager.Domain.Entities.Category", "Category")
                         .WithMany("Books")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -155,12 +184,28 @@ namespace LibraryManager.Infrastructure.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("LibraryManager.Domain.Entities.Model.Author", b =>
+            modelBuilder.Entity("LibraryManager.Domain.Entities.Rental", b =>
+                {
+                    b.HasOne("LibraryManager.Domain.Entities.Book", "Book")
+                        .WithMany("Rentals")
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Book");
+                });
+
+            modelBuilder.Entity("LibraryManager.Domain.Entities.Author", b =>
                 {
                     b.Navigation("Books");
                 });
 
-            modelBuilder.Entity("LibraryManager.Domain.Entities.Model.Category", b =>
+            modelBuilder.Entity("LibraryManager.Domain.Entities.Book", b =>
+                {
+                    b.Navigation("Rentals");
+                });
+
+            modelBuilder.Entity("LibraryManager.Domain.Entities.Category", b =>
                 {
                     b.Navigation("Books");
                 });

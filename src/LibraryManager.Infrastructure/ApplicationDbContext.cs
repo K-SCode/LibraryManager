@@ -14,14 +14,14 @@ namespace LibraryManager.Infrastructure
         public DbSet<Book> Books { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Author> Authors { get; set; }
+        public DbSet<Rental> Rentals { get; set; }
 
         protected override void OnModelCreating(
             ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
             modelBuilder.ApplyConfigurationsFromAssembly(
-                Assembly.GetExecutingAssembly());
+                typeof(ApplicationDbContext).Assembly);
         }
     }
 }

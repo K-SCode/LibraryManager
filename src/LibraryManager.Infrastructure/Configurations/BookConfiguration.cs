@@ -18,7 +18,7 @@ namespace LibraryManager.Infrastructure.Configurations
             base.Configure(builder);
 
             builder.Property(b => b.Title)
-                .HasMaxLength(100)
+                .HasMaxLength(100)  
                 .IsRequired();
 
             builder.Property(b => b.Isbn)
@@ -43,14 +43,19 @@ namespace LibraryManager.Infrastructure.Configurations
                 .HasDefaultValue(BookStatus.Available)
                 .IsRequired();
 
-            builder.HasOne(b => b.Author)
-                .WithMany(b => b.Books)
-                .HasForeignKey(b => b.AuthorId)
+            builder.HasOne(book => book.Author)
+                .WithMany(author => author.Books)
+                .HasForeignKey(book => book.AuthorId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasOne(b => b.Category)
-                .WithMany(b => b.Books)
-                .HasForeignKey(b => b.CategoryId)
+            builder.HasOne(book => book.Category)
+                .WithMany(category => category.Books)
+                .HasForeignKey(book => book.CategoryId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasMany(book => book.Rentals)
+                .WithOne(rental => rental.Book)
+                .HasForeignKey(rental => rental.BookId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }
