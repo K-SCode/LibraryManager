@@ -1,4 +1,5 @@
 ﻿using LibraryManager.Application.Dtos.Books;
+using LibraryManager.Application.DTOs.Rentals;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,13 +8,13 @@ namespace LibraryManager.Application.Interfaces
 {
     public interface IRentalService
     {
-        Task<BorrowBookResponse> RentBookAsync(
+        Task<CreateRentalResponse> RentBookAsync(
             Guid id,
-            BorrowBookRequest bookRequest);
-        Task<BorrowBookResponse> ReturnBookAsync(Guid Id);
+            CreateRentalRequest bookRequest);
+        Task<CreateRentalResponse> ReturnBookAsync(Guid Id);
         Task<IEnumerable<BookShortResponse>> GetAllRentalsBookAsync();
         //IEnumerable<BookShortResponse> GetUserRentalHistory();
-        Task<IEnumerable<BorrowBookResponse>> GetOverdueRentalsAsync();
-        Task<BorrowBookResponse> GetRentalBookByIdAsync(Guid id);
+        Task<IEnumerable<CreateRentalResponse>> GetOverdueRentalsAsync();
+        Task<CreateRentalResponse> GetRentalBookByIdAsync(Guid id);
     }
 }

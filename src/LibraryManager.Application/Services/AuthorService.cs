@@ -8,12 +8,12 @@ namespace LibraryManager.Application.Services
 {
     public class AuthorService : IAuthorService
     {
-        public Task<AuthorShortResponse> CreateAuthorAsync(CreateAuthorRequest authorRequest)
+        public Task<CreateAuthorResponse> CreateAuthorAsync(CreateAuthorRequest authorRequest)
         {
             throw new NotImplementedException();
         }
 
-        public Task<AuthorShortResponse> DeleteAuthorAsync(Guid id)
+        public Task DeleteAuthorAsync(Guid id)
         {
             throw new NotImplementedException();
         }
@@ -33,7 +33,7 @@ namespace LibraryManager.Application.Services
             throw new NotImplementedException();
         }
 
-        public Task<AuthorResponse> UpdateAuthorByIdAsync(UpdateAuthorRequest authorRequest, Guid id)
+        public Task<UpdateAuthorResponse> UpdateAuthorByIdAsync(Guid id, UpdateAuthorRequest authorRequest)
         {
             throw new NotImplementedException();
         }

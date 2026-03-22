@@ -7,9 +7,9 @@ namespace LibraryManager.Application.Interfaces
 {
     public interface ICategoryService
     {
-        Task<CategoryResponse> CreateCategoryAsync(
+        Task<CreateCategoryResponse> CreateCategoryAsync(
             CreateCategoryRequest categoryRequest);
-        Task<CategoryResponse> UpdateCategoryAsync(
+        Task<UpdateCategoryResponse> UpdateCategoryAsync(
             UpdateCategoryRequest categoryRequest,
             Guid id);
         Task DeleteCategoryByIdAsync(Guid id);

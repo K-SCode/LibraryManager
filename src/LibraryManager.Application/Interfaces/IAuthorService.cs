@@ -7,12 +7,12 @@ namespace LibraryManager.Application.Interfaces
 {
     public interface IAuthorService
     {
-        Task<AuthorShortResponse> CreateAuthorAsync(
+        Task<CreateAuthorResponse> CreateAuthorAsync(
             CreateAuthorRequest authorRequest);
-        Task<AuthorShortResponse> DeleteAuthorAsync(Guid id);
-        Task GetDetailsAuthorByIdAsync(Guid id);
+        Task DeleteAuthorAsync(Guid id);
+        Task<AuthorResponse> GetDetailsAuthorByIdAsync(Guid id);
         Task<AuthorShortResponse> GetAuthorByIdAsync(Guid id);
-        Task<AuthorResponse> UpdateAuthorByIdAsync(
+        Task<UpdateAuthorResponse> UpdateAuthorByIdAsync(
             Guid id,
             UpdateAuthorRequest authorRequest);
         Task<IEnumerable<AuthorShortResponse>> GetAllAuthorsAsync();

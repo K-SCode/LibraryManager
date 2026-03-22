@@ -8,12 +8,12 @@ namespace LibraryManager.Application.Services
 {
     public class CategoryService : ICategoryService
     {
-        public Task<CategoryResponse> CreateCategoryAsync(CreateCategoryRequest categoryRequest)
+        public Task<CreateCategoryResponse> CreateCategoryAsync(CreateCategoryRequest categoryRequest)
         {
             throw new NotImplementedException();
         }
 
-        public Task<CategoryResponse> DeleteCategoryByIdAsync(Guid id)
+        public Task DeleteCategoryByIdAsync(Guid id)
         {
             throw new NotImplementedException();
         }
@@ -28,7 +28,7 @@ namespace LibraryManager.Application.Services
             throw new NotImplementedException();
         }
 
-        public Task<CategoryResponse> UpdateCategoryAsync(UpdateCategoryRequest categoryRequest, Guid id)
+        public Task<UpdateCategoryResponse> UpdateCategoryAsync(UpdateCategoryRequest categoryRequest, Guid id)
         {
             throw new NotImplementedException();
         }
