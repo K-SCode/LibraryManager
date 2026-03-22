@@ -1,4 +1,5 @@
 ﻿using LibraryManager.Application.Dtos.Books;
+using LibraryManager.Application.Dtos.Common;
 using LibraryManager.Application.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -8,17 +9,17 @@ namespace LibraryManager.Application.Services
 {
     public class BookService : IBookService
     {
-        public Task<BookResponse> CreateBookAsync(CreateBookRequest bookRequest)
+        public Task<CreateBookResponse> CreateBookAsync(CreateBookRequest bookRequest)
         {
             throw new NotImplementedException();
         }
 
-        public Task<BookShortResponse> DeleteBookAsync(Guid id)
+        public Task DeleteBookAsync(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<BookShortResponse>> GetBookByFiltersAsync()
+        public Task<IEnumerable<BookShortResponse>> GetBookByFiltersAsync(BooksQueryParametersRequest parameters)
         {
             throw new NotImplementedException();
         }
@@ -28,7 +29,7 @@ namespace LibraryManager.Application.Services
             throw new NotImplementedException();
         }
 
-        public Task<BookResponse> UpdateBookAsync(UpdateBookRequest bookRequest, Guid id)
+        public Task<UpdateBookResponse> UpdateBookAsync(Guid id, UpdateBookRequest bookRequest)
         {
             throw new NotImplementedException();
         }

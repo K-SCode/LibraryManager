@@ -1,4 +1,5 @@
 ﻿using LibraryManager.Application.Dtos.Books;
+using LibraryManager.Application.DTOs.Rentals;
 using LibraryManager.Application.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -13,22 +14,22 @@ namespace LibraryManager.Application.Services
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<BorrowBookResponse>> GetOverdueRentalsAsync()
+        public Task<IEnumerable<CreateRentalResponse>> GetOverdueRentalsAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<BorrowBookResponse> GetRentalBookByIdAsync(Guid id)
+        public Task<CreateRentalResponse> GetRentalBookByIdAsync(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<BorrowBookResponse> RentBookAsync(BorrowBookRequest bookRequest, Guid id)
+        public Task<CreateRentalResponse> RentBookAsync(Guid id, CreateRentalRequest bookRequest)
         {
             throw new NotImplementedException();
         }
 
-        public Task<BorrowBookResponse> ReturnBookAsync(Guid Id)
+        public Task<CreateRentalResponse> ReturnBookAsync(Guid Id)
         {
             throw new NotImplementedException();
         }
