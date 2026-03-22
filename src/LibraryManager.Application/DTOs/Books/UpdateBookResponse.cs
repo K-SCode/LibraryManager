@@ -13,8 +13,6 @@ namespace LibraryManager.Application.Dtos.Books
         string Description,
         BookStatus Status,
         DateTime PublishDate,
-        Guid CategoryId,
-        Guid? CurrentBorrowerId,
-        DateTime? ReturnDate
+        Guid CategoryId
       );
 }

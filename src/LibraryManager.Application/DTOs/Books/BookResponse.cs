@@ -8,13 +8,12 @@ namespace LibraryManager.Application.Dtos.Books
     public record BookResponse(
         Guid Id,
         string Title,
-        string Author,
+        Guid AuthorId,
         string Isbn,
         string Description,
         BookStatus Status,
-        DateTime? ReturnDate,
         DateTime PublishDate,
-        string CategoryName
+        Guid CategoryId
         );
 
 }

@@ -8,10 +8,10 @@ namespace LibraryManager.Application.Dtos.Books
     public record BookShortResponse(
         Guid Id,
         string Title,
-        string Author,
+        Guid AuthorId,
         BookStatus Status,
         DateTime PublishDate,
-        string CategoryName
+        Guid CategoryId
         );
 
 }
