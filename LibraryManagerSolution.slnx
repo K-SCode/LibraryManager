@@ -5,5 +5,7 @@
     <Project Path="src/LibraryManager.Infrastructure/LibraryManager.Infrastructure.csproj" />
     <Project Path="src/LibraryManager.WebApi/LibraryManager.WebApi.csproj" />
   </Folder>
-  <Folder Name="/tests/" />
+  <Folder Name="/tests/">
+    <Project Path="tests/LibraryManager.UnitTests/LibraryManager.UnitTests.csproj" Id="4c0f5b8a-0996-4b56-a13b-0e71998dfa52" />
+  </Folder>
 </Solution>

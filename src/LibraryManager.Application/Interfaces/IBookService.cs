@@ -1,5 +1,5 @@
 ﻿using LibraryManager.Application.Dtos.Books;
-using LibraryManager.Application.Dtos.Common;
+using LibraryManager.Domain.Common;
 using LibraryManager.Domain.Enum;
 using System;
 using System.Collections.Generic;
@@ -9,15 +9,16 @@ namespace LibraryManager.Application.Interfaces
 {
     public interface IBookService
     {
-        Task<IEnumerable<BookShortResponse>> GetBookByFiltersAsync(
-            BooksQueryParametersRequest parameters);
-        Task<CreateBookResponse> CreateBookAsync(
+        Task<Result<IEnumerable<BookShortResponse>>> GetBooksByFiltersAsync(
+            BookSearchCriteria parameters);
+        Task<Result<CreateBookResponse>> CreateBookAsync(
             CreateBookRequest bookRequest);
-        Task<UpdateBookResponse> UpdateBookAsync(
+        Task<Result<UpdateBookResponse>> UpdateBookAsync(
             Guid id,
             UpdateBookRequest bookRequest);
-        Task<BookResponse> GetBookByIdAsync(Guid id);
-        Task DeleteBookAsync(Guid id);
+        Task<Result<BookResponse>> GetBookByIdAsync(Guid id);
+        Task<Result<bool>> DeleteBookAsync(Guid id);
+
 
     }
 }

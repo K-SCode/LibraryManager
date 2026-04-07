@@ -1,4 +1,8 @@
+using LibraryManager.Application.Interfaces;
+using LibraryManager.Application.Services;
+using LibraryManager.Domain.Contracts;
 using LibraryManager.Infrastructure;
+using LibraryManager.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -14,6 +18,11 @@ var connectionString =
 builder.Services.AddDbContextPool<ApplicationDbContext>(
     options => options.UseSqlServer(connectionString));
 
+builder.Services.AddScoped<IBookRepository,BookRepository>();
+builder.Services.AddScoped<IAuthorRepository,AuthorRepository>();
+builder.Services.AddScoped<ICategoryRepository,CategoryRepository>();
+builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
+builder.Services.AddScoped<IBookService,BookService>();
 
 var app = builder.Build();
 

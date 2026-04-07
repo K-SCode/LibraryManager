@@ -3,9 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LibraryManager.Application.Dtos.Common
+namespace LibraryManager.Domain.Common
 {
-    public record BooksQueryParametersRequest(
+    public record BookSearchCriteria(
+        string? SearchBy = null,
         string? SearchTerm = null,
         int PageNumber = 1,
         int PageSize = 10,

@@ -1,12 +1,11 @@
-﻿using LibraryManager.Application.Dtos.Books;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LibraryManager.Application.Dtos.Common
+namespace LibraryManager.Domain.Common
 {
     public record PagedResponse<T>(
-        IEnumerable<BookShortResponse> Items,
+        IEnumerable<T> Items,
         int TotalCount,
         int PageNumber,
         int PageSize

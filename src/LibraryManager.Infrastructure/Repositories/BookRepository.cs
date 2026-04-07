@@ -1,56 +1,22 @@
-﻿using LibraryManager.Domain.Entities;
-using LibraryManager.Domain.Repositories;
+﻿using LibraryManager.Application.Specyfication;
+using LibraryManager.Domain.Common;
+using LibraryManager.Domain.Contracts;
+using LibraryManager.Domain.Entities;
+using LibraryManager.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Linq;
 
 namespace LibraryManager.Infrastructure.Repositories
 {
-    public class BookRepository(ApplicationDbContext database) : IBookRepository
+    public class BookRepository(ApplicationDbContext context) 
+        : BaseRepository<Book>(context), IBookRepository
     {
-        public async Task<Book> CreateBookAsync(Book book)
+        public async Task<bool> CheckIsbnExistsAsync(string isbn)
         {
-            database.Books.Add(book);
-            await database.SaveChangesAsync();
-            return book;
-        }
-
-        public async Task<bool> DeleteBookAsync(Guid id)
-        {
-            int deletedRows = await database.Books.Where(tmp => tmp.Id == id)
-                .ExecuteDeleteAsync();
-            return deletedRows > 0;
-        }
-
-        public async Task<IEnumerable<Book>> GetAllBooksAsync()
-        {
-            IEnumerable<Book> books = await database.Books.ToListAsync();
-            return books;
-        }
-
-        public async Task<Book?> GetBookByIdAsync(Guid id)
-        {
-            return await database.Books.FirstOrDefaultAsync(
-                tmp => tmp.Id == id);
-        }
-
-        public async Task<Book?> UpdateBookAsync(Book book)
-        {
-            Book? matchingBook = await database.Books.FirstOrDefaultAsync(
-                tmp => tmp.Id == book.Id);
-            if (matchingBook is null)
-            {
-                return null;
-            }
-
-            database.Entry(matchingBook).CurrentValues.SetValues(book);
-
-            await database.Entry(matchingBook).Reference(tmp => tmp.Author).LoadAsync();
-            await database.Entry(matchingBook).Reference(tmp => tmp.Category).LoadAsync();
-
-            await database.SaveChangesAsync();
-            return matchingBook;
+            return await Context.Set<Book>().AnyAsync(book => book.Isbn == isbn);
         }
     }
 }
